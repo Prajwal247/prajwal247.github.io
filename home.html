@@ -16,6 +16,84 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: #fff;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #1a1a2e;
+        }
+
+        body.light-theme .particle {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme nav {
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .logo,
+        body.light-theme .nav-links a {
+            color: #1a1a2e;
+        }
+
+        body.light-theme .nav-links a::after {
+            background: #1a1a2e;
+        }
+
+        body.light-theme .burger-menu span {
+            background: #1a1a2e;
+        }
+
+        body.light-theme .interest-tag {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: #1a1a2e;
+        }
+
+        body.light-theme .btn-primary {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        body.light-theme .btn-secondary {
+            border-color: #1a1a2e;
+            color: #1a1a2e;
+        }
+
+        body.light-theme .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-theme .social-links a {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        body.light-theme .social-links a:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .social-links svg {
+            fill: #1a1a2e;
+        }
+
+        body.light-theme .hero h1 {
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light-theme .scroll-indicator svg {
+            fill: #1a1a2e;
+        }
+
+        body.light-theme .profile-photo {
+            border-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
         /* Animated background particles */
@@ -80,6 +158,7 @@
             display: flex;
             gap: 30px;
             list-style: none;
+            margin-left: auto;
         }
 
         .nav-links a {
@@ -103,6 +182,145 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger-menu span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .burger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .theme-current {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            justify-content: space-between;
+        }
+
+        body.light-theme .theme-current {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #1a1a2e;
+        }
+
+        .theme-current:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        body.light-theme .theme-current:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 8px;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1100;
+        }
+
+        body.light-theme .theme-dropdown {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-switcher.open .theme-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.2s ease;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+        }
+
+        body.light-theme .theme-option {
+            color: #1a1a2e;
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-theme .theme-option:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-option.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        body.light-theme .theme-option.active {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-switcher.open .dropdown-arrow {
+            transform: rotate(180deg);
         }
 
         /* Hero Section */
@@ -311,8 +529,55 @@
                 padding: 15px 20px;
             }
 
+            .theme-switcher {
+                position: absolute;
+                top: 15px;
+                right: 70px;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
             .nav-links {
-                gap: 15px;
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 280px;
+                height: calc(100vh - 70px);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 40px 20px;
+                gap: 25px;
+                transition: right 0.4s ease;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
+            .nav-links.active li:nth-child(5) { transition-delay: 0.5s; }
+            .nav-links.active li:nth-child(6) { transition-delay: 0.6s; }
+
+            .nav-links a {
+                font-size: 18px;
             }
 
             .hero {
@@ -350,15 +615,40 @@
 
     <!-- Navigation -->
     <nav id="nav">
-        <a href="index.html" class="logo">Prajwal Thapa</a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
+        <a href="home.html" class="logo">Prajwal Thapa</a>
+        <div class="burger-menu" id="burgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="home.html">Home</a></li>
             <li><a href="publications.html">Publications</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="https://prajwal247.github.io/Prajwal_thapa_CV.pdf" target="_blank">CV</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
+        <div class="theme-switcher" id="themeSwitcher">
+            <div class="theme-current" id="themeCurrent">
+                <span id="currentThemeIcon">🌙</span>
+                <span id="currentThemeLabel">Dark</span>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+            <div class="theme-dropdown">
+                <button class="theme-option" data-theme="light">
+                    <span>☀️</span>
+                    <span>Light</span>
+                </button>
+                <button class="theme-option" data-theme="dark">
+                    <span>🌙</span>
+                    <span>Dark</span>
+                </button>
+                <button class="theme-option" data-theme="system">
+                    <span>💻</span>
+                    <span>Auto</span>
+                </button>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -420,6 +710,81 @@
     </section>
 
     <script>
+        // Theme Switcher
+        const body = document.body;
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const themeCurrent = document.getElementById('themeCurrent');
+        const currentThemeIcon = document.getElementById('currentThemeIcon');
+        const currentThemeLabel = document.getElementById('currentThemeLabel');
+        const themeOptions = document.querySelectorAll('.theme-option');
+
+        // Theme configuration
+        const themes = {
+            light: { icon: '☀️', label: 'Light' },
+            dark: { icon: '🌙', label: 'Dark' },
+            system: { icon: '💻', label: 'Auto' }
+        };
+
+        // Get saved theme or default to system
+        let currentTheme = localStorage.getItem('theme') || 'system';
+
+        function updateThemeDisplay(theme) {
+            currentThemeIcon.textContent = themes[theme].icon;
+            currentThemeLabel.textContent = themes[theme].label;
+            
+            // Update active state in dropdown
+            themeOptions.forEach(option => {
+                option.classList.toggle('active', option.dataset.theme === theme);
+            });
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'system') {
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                body.classList.toggle('light-theme', !systemPrefersDark);
+            } else if (theme === 'light') {
+                body.classList.add('light-theme');
+            } else {
+                body.classList.remove('light-theme');
+            }
+            
+            updateThemeDisplay(theme);
+        }
+
+        // Toggle dropdown
+        themeCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeSwitcher.classList.toggle('open');
+        });
+
+        // Theme option click handlers
+        themeOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentTheme = option.dataset.theme;
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+                themeSwitcher.classList.remove('open');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!themeSwitcher.contains(e.target)) {
+                themeSwitcher.classList.remove('open');
+            }
+        });
+
+        // Apply saved theme on load
+        applyTheme(currentTheme);
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (currentTheme === 'system') {
+                applyTheme('system');
+            }
+        });
+
         // Create floating particles
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 50; i++) {
@@ -443,6 +808,33 @@
                 nav.classList.remove('scrolled');
             }
         });
+
+        // Burger menu toggle
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinkItems = navLinks.querySelectorAll('a');
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!nav.contains(event.target)) {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
     </script>
 </body>
+</html>
 </html>

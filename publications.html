@@ -17,6 +17,87 @@
             color: #fff;
             overflow-x: hidden;
             min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #1a1a2e;
+        }
+
+        body.light-theme .particle {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme nav {
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .logo,
+        body.light-theme .nav-links a {
+            color: #1a1a2e;
+        }
+
+        body.light-theme .nav-links a::after {
+            background: #1a1a2e;
+        }
+
+        body.light-theme .burger-menu span {
+            background: #1a1a2e;
+        }
+
+        body.light-theme .filter-btn,
+        body.light-theme .publication-card,
+        body.light-theme .stat-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #1a1a2e;
+        }
+
+        body.light-theme .filter-btn:hover,
+        body.light-theme .filter-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+
+        body.light-theme .publication-card:hover,
+        body.light-theme .stat-card:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        body.light-theme .publication-title {
+            color: #1a1a2e;
+        }
+
+        body.light-theme .tag,
+        body.light-theme .publication-icon {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .pub-link-primary {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        body.light-theme .pub-link-secondary {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.2);
+            color: #1a1a2e;
+        }
+
+        body.light-theme .pub-link-secondary:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .hero h1 {
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Animated background particles */
@@ -76,6 +157,7 @@
             display: flex;
             gap: 30px;
             list-style: none;
+            margin-left: auto;
         }
 
         .nav-links a {
@@ -100,6 +182,145 @@
         .nav-links a:hover::after,
         .nav-links a.active::after {
             width: 100%;
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger-menu span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .burger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .theme-current {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            justify-content: space-between;
+        }
+
+        body.light-theme .theme-current {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #1a1a2e;
+        }
+
+        .theme-current:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        body.light-theme .theme-current:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 8px;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1100;
+        }
+
+        body.light-theme .theme-dropdown {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-switcher.open .theme-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.2s ease;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+        }
+
+        body.light-theme .theme-option {
+            color: #1a1a2e;
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-theme .theme-option:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-option.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        body.light-theme .theme-option.active {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-switcher.open .dropdown-arrow {
+            transform: rotate(180deg);
         }
 
         /* Main Content */
@@ -337,13 +558,57 @@
         @media (max-width: 768px) {
             nav {
                 padding: 15px 20px;
-                flex-direction: column;
-                gap: 15px;
+            }
+
+            .theme-switcher {
+                position: absolute;
+                top: 15px;
+                right: 70px;
+            }
+
+            .burger-menu {
+                display: flex;
             }
 
             .nav-links {
-                gap: 15px;
-                font-size: 14px;
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 280px;
+                height: calc(100vh - 70px);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 40px 20px;
+                gap: 25px;
+                transition: right 0.4s ease;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
+            .nav-links.active li:nth-child(5) { transition-delay: 0.5s; }
+            .nav-links.active li:nth-child(6) { transition-delay: 0.6s; }
+
+            .nav-links a {
+                font-size: 18px;
             }
 
             .container {
@@ -374,16 +639,41 @@
     <div class="particles" id="particles"></div>
 
     <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="logo">Prajwal Thapa</a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="publications.html" class="active">Publications</a></li>
-            <li><a href="blog.html">Blog</a></li>
+    <nav id="nav">
+        <a href="home.html" class="logo">Prajwal Thapa</a>
+        <div class="burger-menu" id="burgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="https://prajwal247.github.io/Prajwal_thapa_CV.pdf" target="_blank">CV</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
+        <div class="theme-switcher" id="themeSwitcher">
+            <div class="theme-current" id="themeCurrent">
+                <span id="currentThemeIcon">🌙</span>
+                <span id="currentThemeLabel">Dark</span>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+            <div class="theme-dropdown">
+                <button class="theme-option" data-theme="light">
+                    <span>☀️</span>
+                    <span>Light</span>
+                </button>
+                <button class="theme-option" data-theme="dark">
+                    <span>🌙</span>
+                    <span>Dark</span>
+                </button>
+                <button class="theme-option" data-theme="system">
+                    <span>💻</span>
+                    <span>Auto</span>
+                </button>
+            </div>
+        </div>
     </nav>
 
     <!-- Main Content -->
@@ -409,7 +699,7 @@
                 <div class="stat-label">Conference Papers</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">3</div>
+                <div class="stat-number">2</div>
                 <div class="stat-label">Journal Articles</div>
             </div>
         </div>
@@ -426,135 +716,182 @@
         <!-- Publications Grid -->
         <div class="publications-grid" id="publications">
             <!-- Publication 1 -->
-            <div class="publication-card" data-category="conference">
+            <div class="publication-card" data-category="workshop">
                 <div class="publication-icon">📄</div>
                 <div class="publication-content">
-                    <h3 class="publication-title">Advanced Neural Architecture Search for Efficient Deep Learning Models</h3>
+                    <h3 class="publication-title">Development of pre-trained transformer-based models for the Nepali language</h3>
                     <div class="publication-meta">
-                        <span>📅 2024</span>
-                        <span>🏛️ NeurIPS 2024</span>
-                        <span>👥 First Author</span>
+                        <span>📅 2025</span>
+                        <span>🏛️ Coling 2025</span>
+                        <span>👥 P Thapa, J Nyachhyon, M Sharma, BK Bal</span>
                     </div>
                     <p class="publication-description">
-                        We propose a novel neural architecture search method that achieves state-of-the-art performance while reducing computational costs by 40%. Our approach leverages gradient-based optimization and introduces a new search space design that enables efficient exploration.
+                        Transformer-based pre-trained language models have dominated the field of Natural Language Processing (NLP) for quite some time now. However, the Nepali language, spoken by approximately 32 million people worldwide, remains significantly underrepresented in this domain. This underrepresentation is primarily attributed to the scarcity of monolingual data corpora and limited available resources for the Nepali language. While existing efforts have predominantly concentrated on basic encoder-based models, there is a notable gap in the exploration of decoder-based architectures. To address this gap, we have collected 27.5 GB of Nepali text data, approximately 2.4 x larger than any previously available Nepali language corpus. Leveraging this data, we pre-trained three different models ie, BERT, RoBERTa, and GPT-2, exclusively for the Nepali Language. Furthermore, we performed instruction tuning and explored its potential for monolingual Nepali data, providing a foundation for future research. Our models outperformed the existing best model by 2 points on Nep-gLUE benchmark, scoring 95.60 and also outperformed existing models on text generation tasks, demonstrating improvements in both understanding and generating Nepali text.
                     </p>
                     <div class="publication-tags">
-                        <span class="tag">Neural Architecture Search</span>
-                        <span class="tag">Deep Learning</span>
-                        <span class="tag">AutoML</span>
+                        <span class="tag">Pre-trained Language Models</span>
+                        <span class="tag">Nepali Language</span>
+                        <span class="tag">Instruction Tuning</span>
                     </div>
                     <div class="publication-links">
-                        <a href="#" class="pub-link pub-link-primary">📖 Read Paper</a>
-                        <a href="#" class="pub-link pub-link-secondary">💻 Code</a>
-                        <a href="#" class="pub-link pub-link-secondary">📊 Slides</a>
+                        <a href="https://aclanthology.org/2025.chipsal-1.2.pdf" class="pub-link pub-link-primary" target="_blank" rel="noopener noreferrer">📖 Read Paper</a>
+                        <a href="https://huggingface.co/datasets/IRIIS-RESEARCH/Nepali-Text-Corpus" class="pub-link pub-link-secondary" target="_blank" rel="noopener noreferrer">💻 Dataset and Models</a>
                     </div>
                 </div>
             </div>
 
             <!-- Publication 2 -->
-            <div class="publication-card" data-category="journal">
+            <div class="publication-card" data-category="conference">
                 <div class="publication-icon">📄</div>
                 <div class="publication-content">
-                    <h3 class="publication-title">Robust Multi-Modal Learning: A Comprehensive Survey and Framework</h3>
+                    <h3 class="publication-title">Consolidating and Developing Benchmarking Datasets for the Nepali Natural Language Understanding Tasks</h3>
                     <div class="publication-meta">
-                        <span>📅 2024</span>
-                        <span>🏛️ IEEE TPAMI</span>
-                        <span>👥 Co-Author</span>
+                        <span>📅 2025</span>
+                        <span>🏛️ IJCNLP-AACL 2025</span>
+                        <span>👥 Jinu Nyachhyon, Mridul Sharma, Prajwal Thapa, Bal Krishna Bal</span>
                     </div>
                     <p class="publication-description">
-                        A comprehensive survey of multi-modal learning approaches with a focus on robustness. We introduce a unified framework for evaluating multi-modal models across various domains and propose new benchmarks for the research community.
+                        The Nepali language has distinct linguistic features, especially its complex script (Devanagari script), morphology, and various dialects, which pose a unique challenge for natural language processing (NLP) evaluation. While the Nepali Language Understanding Evaluation (Nep-gLUE) benchmark provides a foundation for evaluating models, it remains limited in scope, covering four tasks. This restricts their utility for comprehensive assessments of NLP models. To address this limitation, we introduce eight new datasets, creating a new benchmark, the Nepali Language Understanding Evaluation (NLUE) benchmark, which covers a total of 12 tasks for evaluating the performance of models across a diverse set of Natural Language Understanding (NLU) tasks. The added tasks include single-sentence classification, similarity and paraphrase tasks, and Natural Language Inference (NLI) tasks. On evaluating the models using added tasks, we observe that the existing models fall short in handling complex NLU tasks effectively. This expanded benchmark sets a new standard for evaluating, comparing, and advancing models, contributing significantly to the broader goal of advancing NLP research for low-resource languages.
                     </p>
                     <div class="publication-tags">
-                        <span class="tag">Multi-Modal Learning</span>
-                        <span class="tag">Survey</span>
+                        <span class="tag">Nepali Language</span>
+                        <span class="tag">Natural Language Understanding</span>
                         <span class="tag">Benchmarking</span>
+                        <span class="tag">Dataset Development</span>
                     </div>
                     <div class="publication-links">
-                        <a href="#" class="pub-link pub-link-primary">📖 Read Paper</a>
-                        <a href="#" class="pub-link pub-link-secondary">🔗 Project Page</a>
+                        <a href="https://arxiv.org/pdf/2411.19244?"  target="_blank" rel="noopener noreferrer" class="pub-link pub-link-primary">📖 Read Paper</a>
+                        <a href="https://huggingface.co/IRIIS-RESEARCH/datasets" target="_blank" rel="noopener noreferrer" class="pub-link pub-link-secondary">� Dataset and Models</a>
                     </div>
                 </div>
             </div>
 
             <!-- Publication 3 -->
-            <div class="publication-card" data-category="conference">
+            <div class="publication-card" data-category="preprint">
                 <div class="publication-icon">📄</div>
                 <div class="publication-content">
-                    <h3 class="publication-title">Self-Supervised Learning for Vision Transformers in Low-Data Regimes</h3>
+                    <h3 class="publication-title">Local Herb Identification Using Transfer Learning: A CNN-Powered Mobile Application for Nepalese Flora</h3>
                     <div class="publication-meta">
-                        <span>📅 2023</span>
-                        <span>🏛️ ICCV 2023</span>
-                        <span>👥 First Author</span>
+                        <span>📅 2025</span>
+                        <span>🏛️ arXiv Preprint</span>
+                        <span>👥 Prajwal Thapa, Mridul Sharma, Jinu Nyachhyon, Yagya Raj Pandeya</span>
                     </div>
                     <p class="publication-description">
-                        We demonstrate that vision transformers can be effectively trained with minimal labeled data using our novel self-supervised learning approach. Our method achieves competitive performance with only 10% of the labeled data required by traditional approaches.
-                    </p>
+                        Herb classification presents a critical challenge in botanical research, particularly in regions with rich biodiversity such as Nepal. This study introduces a novel deep learning approach for classifying 60 different herb species using Convolutional Neural Networks (CNNs) and transfer learning techniques. Using a manually curated dataset of 12,000 herb images, we developed a robust machine learning model that addresses existing limitations in herb recognition methodologies. Our research employed multiple model architectures, including DenseNet121, 50-layer Residual Network (ResNet50), 16-layer Visual Geometry Group Network (VGG16), InceptionV3, EfficientNetV2, and Vision Transformer (VIT), with DenseNet121 ultimately demonstrating superior performance. Data augmentation and regularization techniques were applied to mitigate overfitting and enhance the generalizability of the model. This work advances herb classification techniques, preserving traditional botanical knowledge and promoting sustainable herb utilization.
                     <div class="publication-tags">
-                        <span class="tag">Self-Supervised Learning</span>
-                        <span class="tag">Vision Transformers</span>
-                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Herb Classification</span>
+                        <span class="tag">Transfer Learning</span>
+                        <span class="tag">CNN</span>
+                        <span class="tag">Mobile Application</span>
                     </div>
                     <div class="publication-links">
-                        <a href="#" class="pub-link pub-link-primary">📖 Read Paper</a>
-                        <a href="#" class="pub-link pub-link-secondary">💻 Code</a>
-                        <a href="#" class="pub-link pub-link-secondary">🎥 Video</a>
+                        <a href="https://arxiv.org/pdf/2505.02147?" target="_blank" rel="noopener noreferrer" class="pub-link pub-link-primary">📖 Read Paper</a>
+                        <a href="https://huggingface.co/datasets/IRIIS-RESEARCH/Local-Herbs-Dataset" target="_blank" rel="noopener noreferrer" class="pub-link pub-link-secondary">💻 Dataset</a>
                     </div>
                 </div>
             </div>
 
             <!-- Publication 4 -->
-            <div class="publication-card" data-category="preprint">
+            <div class="publication-card" data-category="journal">
                 <div class="publication-icon">📄</div>
                 <div class="publication-content">
-                    <h3 class="publication-title">Efficient Fine-Tuning of Large Language Models with Parameter-Efficient Methods</h3>
+                    <h3 class="publication-title">Spatio-Temporal Graph Neural Networks for Late Blight Disease Forecasting</h3>
                     <div class="publication-meta">
                         <span>📅 2024</span>
-                        <span>🏛️ arXiv Preprint</span>
-                        <span>👥 First Author</span>
+                        <span>🏛️ IJICTDC</span>
+                        <span>👥 Harish Chandra Bhandari, Roshan Subedi, Kumar Lama, Yagya Raj Pandeya, Rajendra Dhakal, Oshin Sharma, Rojina Shakya, Prajwal Thapa, Bauram Chaudhary</span>
                     </div>
                     <p class="publication-description">
-                        We introduce a parameter-efficient fine-tuning method for large language models that achieves comparable performance to full fine-tuning while updating only 0.1% of the parameters. Our approach is memory-efficient and enables fine-tuning on consumer hardware.
+                        Late blight, caused by Phytophthora infestans, threatens tomato and potato crops in Nepal. This study explores developing and deploying a mobile application powered by a graph neural network (GNN) to predict late blight risk for Nepali farmers. The GNN trained on 43 years of NASA satellite weather data can generate 5-days forecast for 320 weather stations in Sudurpashim and Karnali Province, Nepal. The mobile application offers user-friendly forecasts and visualizes late blight risk through clear graphical interfaces. In the visited sites, 30% of tomato and potato crops were found infected with late blight, which the app had identified as high-risk. Samples infected with late blight were collected and analyzed in a wet lab setting. All infected samples tested positive for P. infestans, confirming the app's ability to predict real-world late blight outbreaks. This study showcases the successful development and …
                     </p>
                     <div class="publication-tags">
-                        <span class="tag">Large Language Models</span>
-                        <span class="tag">Fine-Tuning</span>
-                        <span class="tag">Parameter Efficiency</span>
+                        <span class="tag">Graph Neural Networks</span>
+                        <span class="tag">Weather Forecasting</span>
+                        <span class="tag">Late Blight Disease Forecasting</span>
+                        <span class="tag">Weather Forecasting</span>
                     </div>
                     <div class="publication-links">
-                        <a href="#" class="pub-link pub-link-primary">📖 Read Paper</a>
-                        <a href="#" class="pub-link pub-link-secondary">💻 Code</a>
+                        <a href="https://www.earticle.net/Article/A458892" target="_blank" rel="noopener noreferrer" class="pub-link pub-link-primary">📖 Read Paper</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Publication 5 -->
-            <div class="publication-card" data-category="workshop">
-                <div class="publication-icon">📄</div>
-                <div class="publication-content">
-                    <h3 class="publication-title">Interpretability in Deep Reinforcement Learning: Challenges and Opportunities</h3>
-                    <div class="publication-meta">
-                        <span>📅 2023</span>
-                        <span>🏛️ ICML Workshop</span>
-                        <span>👥 Co-Author</span>
-                    </div>
-                    <p class="publication-description">
-                        This workshop paper explores the challenges of interpretability in deep reinforcement learning systems. We present preliminary findings on visualization techniques and propose future research directions for making RL agents more transparent.
-                    </p>
-                    <div class="publication-tags">
-                        <span class="tag">Reinforcement Learning</span>
-                        <span class="tag">Interpretability</span>
-                        <span class="tag">XAI</span>
-                    </div>
-                    <div class="publication-links">
-                        <a href="#" class="pub-link pub-link-primary">📖 Read Paper</a>
-                        <a href="#" class="pub-link pub-link-secondary">📊 Poster</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
+        // Theme Switcher
+        const body = document.body;
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const themeCurrent = document.getElementById('themeCurrent');
+        const currentThemeIcon = document.getElementById('currentThemeIcon');
+        const currentThemeLabel = document.getElementById('currentThemeLabel');
+        const themeOptions = document.querySelectorAll('.theme-option');
+
+        // Theme configuration
+        const themes = {
+            light: { icon: '☀️', label: 'Light' },
+            dark: { icon: '🌙', label: 'Dark' },
+            system: { icon: '💻', label: 'Auto' }
+        };
+
+        // Get saved theme or default to system
+        let currentTheme = localStorage.getItem('theme') || 'system';
+
+        function updateThemeDisplay(theme) {
+            currentThemeIcon.textContent = themes[theme].icon;
+            currentThemeLabel.textContent = themes[theme].label;
+            
+            // Update active state in dropdown
+            themeOptions.forEach(option => {
+                option.classList.toggle('active', option.dataset.theme === theme);
+            });
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'system') {
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                body.classList.toggle('light-theme', !systemPrefersDark);
+            } else if (theme === 'light') {
+                body.classList.add('light-theme');
+            } else {
+                body.classList.remove('light-theme');
+            }
+            
+            updateThemeDisplay(theme);
+        }
+
+        // Toggle dropdown
+        themeCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeSwitcher.classList.toggle('open');
+        });
+
+        // Theme option click handlers
+        themeOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentTheme = option.dataset.theme;
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+                themeSwitcher.classList.remove('open');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!themeSwitcher.contains(e.target)) {
+                themeSwitcher.classList.remove('open');
+            }
+        });
+
+        // Apply saved theme on load
+        applyTheme(currentTheme);
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (currentTheme === 'system') {
+                applyTheme('system');
+            }
+        });
+
         // Create floating particles
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 50; i++) {
@@ -587,6 +924,33 @@
                 }
             });
         }
+
+        // Burger menu toggle
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        const nav = document.getElementById('nav');
+
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinkItems = navLinks.querySelectorAll('a');
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!nav.contains(event.target)) {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
