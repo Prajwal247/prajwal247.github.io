@@ -1,4 +1,5 @@
 import React from 'react';
+import profileImage from '../../profile.JPG';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import Particles from '../components/Particles.jsx';
@@ -284,7 +285,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-content">
           <div className="profile-photo">
-            <img src="/profile.JPG" alt="Prajwal_Thapa" onError={(e) => {
+            <img src={profileImage} alt="Prajwal_Thapa" onError={(e) => {
               const parent = e.currentTarget.parentElement;
               e.currentTarget.style.display = 'none';
               parent.textContent = '👤';
