@@ -1,1 +1,4 @@
 theme: jekyll-theme-slate
+permalink: pretty
+url: https://prajwal247.github.io
+baseurl: 

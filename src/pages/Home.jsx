@@ -1,0 +1,342 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Nav from '../components/Nav.jsx';
+import Particles from '../components/Particles.jsx';
+
+export default function Home() {
+  return (
+    <>
+      <style>{`
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        body.light-theme {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #1a1a2e;
+        }
+        body.light-theme .particle {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        body.light-theme nav {
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        body.light-theme .logo,
+        body.light-theme .nav-links a {
+            color: #1a1a2e;
+        }
+        body.light-theme .nav-links a::after {
+            background: #1a1a2e;
+        }
+        body.light-theme .burger-menu span {
+            background: #1a1a2e;
+        }
+        body.light-theme .interest-tag {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: #1a1a2e;
+        }
+        body.light-theme .btn-primary {
+            background: #1a1a2e;
+            color: #fff;
+        }
+        body.light-theme .btn-secondary {
+            border-color: #1a1a2e;
+            color: #1a1a2e;
+        }
+        body.light-theme .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        body.light-theme .social-links a {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+        body.light-theme .social-links a:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        body.light-theme .social-links svg {
+            fill: #1a1a2e;
+        }
+        body.light-theme .hero h1 {
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.light-theme .scroll-indicator svg {
+            fill: #1a1a2e;
+        }
+        body.light-theme .profile-photo {
+            border-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 50px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin-left: auto;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .burger-menu span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .burger-menu.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .burger-menu.active span:nth-child(2) { opacity: 0; }
+        .burger-menu.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        .theme-switcher { position: relative; margin-left: 20px; }
+        .theme-current {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px; border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer; font-size: 14px; color: #fff;
+            transition: all 0.3s ease; min-width: 120px; justify-content: space-between;
+        }
+        body.light-theme .theme-current { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: #1a1a2e; }
+        .theme-current:hover { background: rgba(255,255,255,0.15); }
+        body.light-theme .theme-current:hover { background: rgba(0,0,0,0.08); }
+        .theme-dropdown {
+            position: absolute; top: calc(100% + 8px); right: 0;
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 15px;
+            padding: 8px; min-width: 150px; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.3s ease; z-index: 1100;
+        }
+        body.light-theme .theme-dropdown { background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.1); }
+        .theme-switcher.open .theme-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .theme-option {
+            display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+            border-radius: 10px; cursor: pointer; font-size: 14px; color: #fff;
+            transition: all 0.2s ease; border: none; background: transparent; width: 100%; text-align: left;
+        }
+        body.light-theme .theme-option { color: #1a1a2e; }
+        .theme-option:hover { background: rgba(255,255,255,0.1); }
+        body.light-theme .theme-option:hover { background: rgba(0,0,0,0.05); }
+        .theme-option.active { background: rgba(255,255,255,0.15); }
+        body.light-theme .theme-option.active { background: rgba(0,0,0,0.08); }
+        .dropdown-arrow { font-size: 10px; transition: transform 0.3s ease; }
+        .theme-switcher.open .dropdown-arrow { transform: rotate(180deg); }
+        .hero {
+            position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 0 50px; z-index: 1;
+        }
+        .hero-content { max-width: 900px; text-align: center; animation: fadeInUp 1s ease; }
+        .profile-photo {
+            width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 30px;
+            border: 5px solid rgba(255,255,255,0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex; align-items: center; justify-content: center; font-size: 72px;
+        }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .social-links { display: flex; gap: 20px; justify-content: center; margin-top: 40px; animation: fadeInUp 1s ease 1.2s both; }
+        .social-links a {
+            width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);
+        }
+        .social-links a:hover { background: rgba(255,255,255,0.2); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .social-links svg { width: 24px; height: 24px; fill: #fff; }
+        @keyframes fadeInUp { from { opacity:0; transform: translateY(30px);} to { opacity:1; transform: translateY(0);} }
+        .greeting { font-size: 24px; margin-bottom: 10px; opacity: 0.9; }
+        .hero h1 {
+            font-size: 72px; margin-bottom: 20px; background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        .hero h2 { font-size: 36px; margin-bottom: 30px; font-weight: 300; opacity: 0.9; animation: fadeInUp 1s ease 0.4s both; }
+        .hero-description { font-size: 18px; line-height: 1.8; margin-bottom: 40px; opacity: 0.85; animation: fadeInUp 1s ease 0.6s both; }
+        .interests { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 50px; animation: fadeInUp 1s ease 0.8s both; }
+        .interest-tag {
+            background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 25px; font-size: 14px; backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; cursor: default;
+        }
+        .interest-tag:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; animation: fadeInUp 1s ease 1s both; }
+        .btn { padding: 15px 40px; border-radius: 30px; text-decoration: none; font-size: 16px; font-weight: 600; transition: all 0.3s ease; display: inline-block; }
+        .btn-primary { background: #fff; color: #1a1a2e; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+        .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0);} 40%{ transform: translateX(-50%) translateY(-20px);} 60%{ transform: translateX(-50%) translateY(-10px);} }
+        .scroll-indicator svg { width: 30px; height: 30px; opacity: 0.7; }
+        @media (max-width: 768px) {
+          nav { padding: 15px 20px; }
+          .theme-switcher { position: absolute; top: 15px; right: 70px; }
+          .burger-menu { display: flex; }
+          .nav-links {
+            position: fixed; top: 70px; right: -100%; width: 280px; height: calc(100vh - 70px);
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); flex-direction: column; padding: 40px 20px;
+            gap: 25px; transition: right 0.4s ease; border-left: 1px solid rgba(255,255,255,0.1);
+          }
+          .nav-links.active { right: 0; }
+          .nav-links li { opacity: 0; transform: translateX(50px); transition: all 0.3s ease; }
+          .nav-links.active li { opacity: 1; transform: translateX(0); }
+          .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+          .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+          .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+          .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
+          .nav-links.active li:nth-child(5) { transition-delay: 0.5s; }
+          .nav-links.active li:nth-child(6) { transition-delay: 0.6s; }
+          .nav-links a { font-size: 18px; }
+          .hero { padding: 0 20px; }
+          .hero h1 { font-size: 48px; }
+          .hero h2 { font-size: 24px; }
+          .hero-description { font-size: 16px; }
+          .cta-buttons { flex-direction: column; align-items: center; }
+          .btn { width: 100%; max-width: 300px; text-align: center; }
+        }
+      `}</style>
+
+      <Particles />
+      <Nav />
+
+      <section className="hero">
+        <div className="hero-content">
+          <div className="profile-photo">
+            <img src="/profile.JPG" alt="Prajwal_Thapa" onError={(e) => {
+              const parent = e.currentTarget.parentElement;
+              e.currentTarget.style.display = 'none';
+              parent.textContent = '👤';
+            }} />
+          </div>
+          <p className="greeting">👋 Hey there, I'm</p>
+          <h1>Prajwal Thapa</h1>
+          <h2>AI Researcher & Developer</h2>
+          <p className="hero-description">
+            I am very passionate about advancing artificial intelligence through my research in deep learning, natural language processing and computer vision. I am currently interested in learning about the application of AI and putting them into practice.
+          </p>
+          <div className="interests">
+            <span className="interest-tag">🧠 Machine Learning</span>
+            <span className="interest-tag">💬 NLP</span>
+            <span className="interest-tag">👁️ Computer Vision</span>
+            <span className="interest-tag">🤖 Reinforcement Learning</span>
+            <span className="interest-tag">📊 Data Science</span>
+          </div>
+          <div className="cta-buttons">
+            <Link to="/publications" className="btn btn-primary">View My Work</Link>
+            <Link to="/contact" className="btn btn-secondary">Get In Touch</Link>
+          </div>
+          <div className="social-links">
+            <a href="mailto:prazzwalthapa87@gmail.com" title="Email" aria-label="Email">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
+            <a href="https://x.com/prazzwal16" target="_blank" rel="noreferrer" title="X (Twitter)" aria-label="X">
+              <svg viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=pgmm1FUAAAAJ&hl=en" target="_blank" rel="noreferrer" title="Google Scholar" aria-label="Google Scholar">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/Prajwal247" target="_blank" rel="noreferrer" title="GitHub" aria-label="GitHub">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div className="scroll-indicator">
+          <svg fill="white" viewBox="0 0 24 24">
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+          </svg>
+        </div>
+      </section>
+    </>
+  );
+}
+
